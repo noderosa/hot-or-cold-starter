@@ -1,12 +1,28 @@
 
 $(document).ready(function(){
+	var count = 0;
+	var secretNumber = computerChoice();
 
-	var computerChoice = Math.random();
+	var num;
+
+	function computerChoice() {
+		return Math.floor(Math.random() * 100) + 1; 
+	}; 
+
+	console.log(secretNumber);
 	
 	$('#new').on('click', function (enter) {
 		enter.preventDefault();
 
-		var num = $('#userGuess').val();
+		
+	});
+	
+
+	$('#guessButton').on('click', function (enter) {
+		enter.preventDefault();
+		num = parseInt($('#userGuess').val());
+
+ 
 		if (num == "" || isNaN(num)){
 			alert("Please enter a number.");
 		}
@@ -21,29 +37,60 @@ $(document).ready(function(){
 
 		else {
 
-			newGame();
+			checkTemp(num,secretNumber);
+			countUp();
+			appendGuess();
 		}
-	});
-	
 
-	$('#guessButton').on('click', function (enter) {}
-	var checkTemp = function (difference);
-	
-        if (difference <= 50) {
-            $('#feedback').("ice cold <br>");
-        }
-        else if (difference ) {
-            $('#feedback').("cold <br>");
-        }
+		
 
-        else {
-            $('#feedback').("hot <br>");
-        }
+  	});
 
+		$('#new').on('click', function (enter) {
+  		enter.preventDefault();
+  		newGame();
+  	});
+  	
 
-  }
-}
+  	var checkTemp = function (userGuess, secretNumber) {
+		var difference = Math.abs(userGuess-secretNumber);
+	        if (difference === 0) {
+	            $('#feedback').text("that's right!");
+	        }
 
+	        else if (difference >= 50) {
+	            $('#feedback').text("ice cold");
+	        }
+	        else if (difference >= 30) {
+	            $('#feedback').text("warm");
+	        }
+
+	        else if (difference >= 20) {
+	            $('#feedback').text("hot");
+	        }
+
+	        else if (difference >= 10) {
+	            $('#feedback').text("very hot");
+	        }
+	    }
+
+	 function countUp(){
+	 	count++;
+	 	$('#count').text(count);
+	 }
+
+	 function appendGuess(){
+	 	$('#guessList').append("<li>"+num+"</li>");
+	 }
+
+	 function newGame(){
+	 	clearText();
+
+	 }
+
+	 function clearText(){
+	 	$('#guessList').val(' ');
+	 }
 
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
