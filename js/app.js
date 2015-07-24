@@ -20,8 +20,9 @@ $(document).ready(function(){
 
 	$('#guessButton').on('click', function (enter) {
 		enter.preventDefault();
-		num = parseInt($('#userGuess').val());
 
+		num = parseInt($('#userGuess').val());
+		$('#userGuess').val(' ');
  
 		if (num == "" || isNaN(num)){
 			alert("Please enter a number.");
@@ -46,7 +47,7 @@ $(document).ready(function(){
 
   	});
 
-		$('#new').on('click', function (enter) {
+		$('.new').on('click', function (enter) {
   		enter.preventDefault();
   		newGame();
   	});
@@ -84,12 +85,13 @@ $(document).ready(function(){
 	 }
 
 	 function newGame(){
-	 	clearText();
+	 	$('#guessList').html(' ');
+	 	count = 0;
+	 	$('#count').html(count);
+	 	$('#feedback').html("Make Your Guess!");
+	 	secretNumber = computerChoice();
+	 	console.log(secretNumber);
 
-	 }
-
-	 function clearText(){
-	 	$('#guessList').val(' ');
 	 }
 
 	/*--- Display information modal box ---*/
